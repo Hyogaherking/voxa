@@ -1,0 +1,174 @@
+@import 'tailwindcss';
+
+/*
+  Voxa — tokens visuais
+  Cores suaves e de baixa saturação (RNF03): reduzem o brilho e a carga
+  sensorial sem perder contraste de texto (todas as combinações de texto
+  passam WCAG AA). As cores dos cartões seguem a ideia da Chave de
+  Fitzgerald usada em CAA: cada cor pode marcar um tipo de palavra.
+*/
+@theme {
+  --font-sans: 'Atkinson Hyperlegible Next Variable', ui-sans-serif, system-ui, sans-serif;
+
+  --color-nevoa: #f2f5f8;
+  --color-superficie: #ffffff;
+  --color-tinta: #1d2936;
+  --color-tinta-suave: #4f5f70;
+  --color-linha: #d6dee6;
+  --color-azul: #2c62c9;
+  --color-azul-escuro: #214ea6;
+  --color-azul-claro: #e2ebfa;
+  --color-verde: #227a4b;
+  --color-verde-claro: #def2e6;
+  --color-perigo: #b42318;
+  --color-perigo-claro: #fbe4e1;
+  --color-calma: #ece8f8;
+
+  --radius-cartao: 1.375rem;
+  --radius-campo: 0.875rem;
+}
+
+:root {
+  /* Fundo e borda de cada cor de cartão */
+  --ceu: #dcebfc;
+  --ceu-borda: #a6c6ee;
+  --sol: #fcefc4;
+  --sol-borda: #e3c96f;
+  --folha: #dbf1e1;
+  --folha-borda: #98cca8;
+  --lavanda: #e8e2f9;
+  --lavanda-borda: #bcade6;
+  --rosa: #fadee4;
+  --rosa-borda: #e4a5b4;
+  --pessego: #fde4ce;
+  --pessego-borda: #ebb687;
+  --menta: #d4efea;
+  --menta-borda: #8ecbc1;
+  --nuvem: #e7ecf1;
+  --nuvem-borda: #b6c3cf;
+
+  --largura-borda: 2px;
+  --min-cartao: 148px;
+  --tam-rotulo: 1.3rem;
+
+  color-scheme: light;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Contraste reforçado (preferência do responsável) */
+:root[data-contraste='alto'] {
+  --color-tinta-suave: #2b3846;
+  --color-linha: #7d8c9b;
+  --ceu-borda: #2c62c9;
+  --sol-borda: #8a6a00;
+  --folha-borda: #227a4b;
+  --lavanda-borda: #5b3fb5;
+  --rosa-borda: #a3284a;
+  --pessego-borda: #a2531b;
+  --menta-borda: #13756a;
+  --nuvem-borda: #4f5f70;
+  --largura-borda: 3px;
+}
+
+:root[data-tamanho='medio'] {
+  --min-cartao: 104px;
+  --tam-rotulo: 1.08rem;
+}
+:root[data-tamanho='pequeno'] {
+  --min-cartao: 80px;
+  --tam-rotulo: 0.95rem;
+}
+
+.cor-ceu { --fundo: var(--ceu); --borda: var(--ceu-borda); }
+.cor-sol { --fundo: var(--sol); --borda: var(--sol-borda); }
+.cor-folha { --fundo: var(--folha); --borda: var(--folha-borda); }
+.cor-lavanda { --fundo: var(--lavanda); --borda: var(--lavanda-borda); }
+.cor-rosa { --fundo: var(--rosa); --borda: var(--rosa-borda); }
+.cor-pessego { --fundo: var(--pessego); --borda: var(--pessego-borda); }
+.cor-menta { --fundo: var(--menta); --borda: var(--menta-borda); }
+.cor-nuvem { --fundo: var(--nuvem); --borda: var(--nuvem-borda); }
+
+html,
+body {
+  background: var(--color-nevoa);
+  color: var(--color-tinta);
+  font-family: var(--font-sans);
+  overscroll-behavior: none;
+}
+
+body {
+  font-size: 1.0625rem;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Letra bastão: rótulos em maiúsculas, como na alfabetização inicial */
+:root[data-bastao='sim'] .rotulo {
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+/* Foco sempre visível e grosso para navegação por teclado ou acionador */
+:where(button, a, input, select, textarea, [tabindex]):focus-visible {
+  outline: 4px solid var(--color-azul);
+  outline-offset: 3px;
+  border-radius: 0.75rem;
+}
+
+.grade-cartoes {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(var(--min-cartao), 1fr));
+  gap: 0.75rem;
+}
+
+/* Evita que o toque longo selecione texto ou abra menu do navegador */
+.sem-selecao {
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+}
+
+.rolagem-fina {
+  scrollbar-width: thin;
+}
+.sem-barra {
+  scrollbar-width: none;
+}
+.sem-barra::-webkit-scrollbar {
+  display: none;
+}
+
+dialog::backdrop {
+  background: rgb(29 41 54 / 0.45);
+}
+
+input[type='range'] {
+  accent-color: var(--color-azul);
+  height: 2.5rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Tablets: figuras um pouco maiores, mantendo o mesmo tamanho de toque relativo */
+@media (min-width: 768px) {
+  :root {
+    --min-cartao: 172px;
+    --tam-rotulo: 1.4rem;
+  }
+  :root[data-tamanho='medio'] {
+    --min-cartao: 132px;
+    --tam-rotulo: 1.15rem;
+  }
+  :root[data-tamanho='pequeno'] {
+    --min-cartao: 104px;
+    --tam-rotulo: 1rem;
+  }
+}
