@@ -37,7 +37,9 @@ export function PerfilCrianca() {
   const ehAvatar = (img: Imagem) => JSON.stringify(img) === JSON.stringify(rascunho.avatar);
 
   const salvar = async () => {
-    await db.perfil.put({ ...rascunho, nome: rascunho.nome.trim(), atualizadoEm: Date.now() });
+    const salvo = { ...rascunho, nome: rascunho.nome.trim(), atualizadoEm: Date.now() };
+    await db.perfil.put(salvo);
+    setRascunho(salvo);
     avisar('Perfil salvo');
   };
 
