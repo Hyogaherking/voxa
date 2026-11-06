@@ -2,6 +2,8 @@
 
 Aplicativo gratuito de **comunicação alternativa** e **expressão de emoções** para crianças com Transtorno do Espectro Autista (TEA). Funciona **sem internet** e guarda tudo **no próprio aparelho**.
 
+**Acesse:** https://hyogaherking.github.io/voxa/ — abra no celular e instale na tela inicial (Chrome: menu → *Instalar app*; iPhone: Compartilhar → *Adicionar à Tela de Início*).
+
 Trabalho de Conclusão de Curso — Tecnologia em Análise e Desenvolvimento de Sistemas, Centro Universitário UnEduvale (Avaré/SP).
 Autor: Gabriel Eduardo Filadelfo Serafim · Orientador: Prof. Nicolas Antonio Messias dos Santos Collo.
 
